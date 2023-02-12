@@ -1,6 +1,7 @@
 package qa.test.payrollApp.entity;
 
 import jakarta.persistence.*;
+import qa.test.payrollApp.entity.dictionary.EmployeeStatus;
 import qa.test.payrollApp.entity.dictionary.Role;
 
 @Entity
@@ -8,40 +9,41 @@ public class Employee {
 
     @Id
     @GeneratedValue
-    private int id;
+    private int employeeId;
 
-    private int companyId;
+    @ManyToOne
+    @JoinColumn(name = "id")
+    private Company company;
 
     private String name;
 
     private String surname;
 
+    private String documentId;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @Enumerated(EnumType.STRING)
+    private EmployeeStatus status;
+
     public Employee(){};
 
-    public Employee(int companyId, String name, String surname, Role role){
-        this.companyId = companyId;
+    public Employee(Company company, String name, String surname, String documentId, Role role){
+        this.company = company;
         this.name = name;
         this.surname = surname;
+        this.documentId = documentId;
         this.role = role;
+        this.status = EmployeeStatus.hired;
     }
 
-    public int getId() {
-        return id;
+    public int getEmployeeId() {
+        return employeeId;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(int companyId) {
-        this.companyId = companyId;
+    public void setEmployeeId(int id) {
+        this.employeeId = id;
     }
 
     public String getName() {
@@ -60,11 +62,31 @@ public class Employee {
         this.surname = surname;
     }
 
+    public String getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
+    }
+
     public Role getRole() {
         return role;
     }
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public EmployeeStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(EmployeeStatus status) {
+        this.status = status;
+    }
+
+    public void fireEmployee(){
+        this.status = EmployeeStatus.fired;
     }
 }
