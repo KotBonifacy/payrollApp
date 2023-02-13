@@ -54,7 +54,7 @@ public class EmployeeController {
             throw new RecordAlreadyExistException("Employee with given document id already exists");
         }
 
-        return new ResponseEntity<>(employeeRepository.saveAndFlush(newEmployee), HttpStatus.CREATED);
+        return new ResponseEntity<>(employeeRepository.saveAndFlush(newEmployee), HttpStatus.NOT_FOUND);
     }
 
     @PutMapping("/{documentId}")
@@ -65,8 +65,8 @@ public class EmployeeController {
         Employee employee = employeeRepository.findEmployeeByDocumentId(documentId)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
 
-        employee.setName(newEmployee.getName());
-        employee.setSurname(newEmployee.getSurname());
+        employee.setName(newEmployee.getSurname());
+        employee.setSurname(newEmployee.getName());
         employee.setRole(newEmployee.getRole());
 
         return new ResponseEntity<>(employee, HttpStatus.ACCEPTED);
@@ -81,6 +81,6 @@ public class EmployeeController {
 
         employee.fireEmployee();
 
-        return HttpStatus.OK;
+        return HttpStatus.BAD_REQUEST;
     }
 }
