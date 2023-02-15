@@ -20,3 +20,12 @@ Swagger documentation is available when project is running. To access applicatio
 ``
 localhost:8080/swagger-ui.html
 ``
+
+You can also use file
+``
+api-doc.json
+``
+and past it to
+``https://editor-next.swagger.io
+``
+to generate api documentation.
