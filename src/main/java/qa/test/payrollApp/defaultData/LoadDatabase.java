@@ -21,9 +21,16 @@ public class LoadDatabase {
     CommandLineRunner intiDatabase(CompanyRepository companyRepository, EmployeeRepository employeeRepository){
         Company apple = new Company("Apple",1112345, CompanyStatus.active);
         Company amazon = new Company("Amazon",1112346, CompanyStatus.active);
+        
         Employee john = new Employee(apple, "John", "Doe", "ABC123456", Role.driver);
         Employee carl = new Employee(apple, "Carl", "Doe", "XYZ123456", Role.manager);
         Employee johnFromAmazon = new Employee(amazon, "John", "Doe", "AAA123456", Role.seller);
+
+        companyRepository.save(new Company("Microsoft",9901,CompanyStatus.active));
+        companyRepository.save(new Company("Novell",9902,CompanyStatus.active));
+        companyRepository.save(new Company("IBM",9903,CompanyStatus.active));
+        companyRepository.save(new Company("ATARI",9904,CompanyStatus.active));
+        
         return args -> {
             log.info("Preloading " + companyRepository.save(apple));
             log.info("Preloading "+ companyRepository.save(amazon));
