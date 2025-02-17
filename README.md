@@ -3,7 +3,7 @@
 ## General information
 Spring-boot version: 3
 
-Java SDK version: 19
+Java SDK version: 21
 
 ## How to run project
 To run project you can use your IDE (for example IntelliJIDEA) and run **PayrollAppApplication**
